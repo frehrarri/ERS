@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>ERS</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<filter>
+	<filter-name>Cors</filter-name>
+	<filter-class>com.revature.utils.CORSFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>Cors</filter-name>
+	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- login page servlets -->
+
+	<servlet>
+		<servlet-name>GetAdminLoginPageServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetAdminLoginPageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetAdminLoginPageServlet</servlet-name>
+		<url-pattern>/getAdminLoginPage</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetEmployeeLoginPageServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetEmployeeLoginPageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetEmployeeLoginPageServlet</servlet-name>
+		<url-pattern>/getEmployeeLoginPage</url-pattern>
+	</servlet-mapping>
+
+	<!-- employee GET servlets -->
+
+	<servlet>
+		<servlet-name>GetEmployeeNewRequestServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetEmployeeNewRequestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetEmployeeNewRequestServlet</servlet-name>
+		<url-pattern>/getEmployeeNewRequest</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetEmployeePreviousRequestsServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetEmployeePreviousRequestsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetEmployeePreviousRequestsServlet</servlet-name>
+		<url-pattern>/getEmployeePreviousRequest</url-pattern>
+	</servlet-mapping>
+
+	<!-- employee POST servlets -->
+
+	<servlet>
+		<servlet-name>PostEmployeeRequestServlet</servlet-name>
+		<servlet-class>com.revature.controllers.PostEmployeeRequestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PostEmployeeRequestServlet</servlet-name>
+		<url-pattern>/postEmployeeRequest</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- manager GET servlets -->
+
+	<servlet>
+		<servlet-name>GetManagersPendingRequestsServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetManagersPendingRequestsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetManagersPendingRequestsServlet</servlet-name>
+		<url-pattern>/getManagersPendingRequests</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetManagersCompletedRequestsServlet</servlet-name>
+		<servlet-class>com.revature.controllers.GetManagersCompletedRequestsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetManagersCompletedRequestsServlet</servlet-name>
+		<url-pattern>/getManagersCompletedRequests</url-pattern>
+	</servlet-mapping>
+	
+	<!-- manager POST servlets -->
+
+	<servlet>
+		<servlet-name>PostManagersDecisionServlet</servlet-name>
+		<servlet-class>com.revature.controllers.PostManagersDecisionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PostManagersDecisionServlet</servlet-name>
+		<url-pattern>/postManagersDecisionServlet</url-pattern>
+	</servlet-mapping>
+
+</web-app>
