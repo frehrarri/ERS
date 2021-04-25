@@ -1,5 +1,12 @@
 package com.revature.repos;
 
-public interface ManagerDAOs {
+import java.util.List;
 
+import com.revature.models.Managers;
+
+public interface ManagerDAOs {
+	
+	public List<Managers> pendingRequests();
+	public List<Managers> completedRequests();
+	public void updateRequestStatus();
 }
