@@ -13,6 +13,8 @@ public class Managers {
 	private String refundStatusId;
 	private String refundType;
 	private int refundId;
+	private String username;
+	private String password;
 	
 	public Managers(int refundId, double refundAmount, Date refundRequestedDate, Date refundResolvedDate, String refundAuthor, String refundResolver, String refundStatusId,
 			String refundType, String refundDescription) {
@@ -25,6 +27,14 @@ public class Managers {
 		this.refundStatusId = refundStatusId;
 		this.refundType = refundType;
 		this.refundDescription = refundDescription;
+	}
+	
+
+	
+	public Managers(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public Managers() {
@@ -95,6 +105,17 @@ public class Managers {
 		this.refundType = refundType;
 	}
 	
-	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }

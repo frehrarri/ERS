@@ -13,6 +13,8 @@ public class Employees {
 	private String refundStatusId;
 	private String refundType;
 	private int refundId;
+	private String username;
+	private String password;
 	
 	public Employees(int refundId, double refundAmount, Date refundRequestedDate, Date refundResolvedDate, String refundAuthor, String refundResolver, String refundStatusId,
 			String refundType, String refundDescription) {
@@ -25,6 +27,12 @@ public class Employees {
 		this.refundStatusId = refundStatusId;
 		this.refundType = refundType;
 		this.refundDescription = refundDescription;
+	}
+	
+	public Employees(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 	
 	public Employees() {
@@ -95,6 +103,17 @@ public class Employees {
 		this.refundType = refundType;
 	}
 
-	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 }
