@@ -14,6 +14,37 @@ import com.revature.utils.ConnectionUtil;
 
 public class ManagerDAOsImpl implements ManagerDAOs{
 	
+	public Managers getUserByUsername(String username) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM users WHERE username = ?;";
+
+			// The prepared statement object will run a query against the database with an open
+			// connection. It will protect against SQL injection.
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, username);
+
+
+			ResultSet result = statement.executeQuery();
+
+			// This will go through each result and get the info for the home, adding it to
+			// the list.
+			while (result.next()) {
+				Managers user = new Managers();
+				user.setUsername(result.getString("username"));
+				user.setPassword(result.getString("password"));
+				return user;
+			}
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public List<Managers> pendingRequests() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
