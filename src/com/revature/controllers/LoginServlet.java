@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.models.Managers;
-import com.revature.services.ManagerServices;
+import com.revature.models.Users;
+import com.revature.services.UserServices;
 
-public class GetManagerLoginPageServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
 	ObjectMapper om = new ObjectMapper();
-	ManagerServices ms = new ManagerServices();
+	UserServices us = new UserServices();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		BufferedReader reader = req.getReader();
@@ -36,19 +36,12 @@ public class GetManagerLoginPageServlet extends HttpServlet {
 
 		String body = new String(sb);
 
-		Managers user = om.readValue(body, Managers.class);
+		Users user = om.readValue(body, Users.class);
 
-		if (ms.login(user)) {
+		if (us.login(user)) {
 			resp.setStatus(200);
 		} else {
 			resp.setStatus(403);
 		}
 	}
 }
-
-
-
-
-
-
-

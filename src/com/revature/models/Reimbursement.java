@@ -2,7 +2,7 @@ package com.revature.models;
 
 import java.sql.Date;
 
-public class Managers {
+public class Reimbursement {
 
 	private double refundAmount;
 	private Date refundRequestedDate;
@@ -13,11 +13,11 @@ public class Managers {
 	private String refundStatusId;
 	private String refundType;
 	private int refundId;
-	private String username;
-	private String password;
-	
-	public Managers(int refundId, double refundAmount, Date refundRequestedDate, Date refundResolvedDate, String refundAuthor, String refundResolver, String refundStatusId,
-			String refundType, String refundDescription) {
+
+	public Reimbursement(int refundId, double refundAmount, Date refundRequestedDate, Date refundResolvedDate,
+			String refundAuthor, String refundResolver, String refundStatusId, String refundType,
+			String refundDescription) {
+
 		this.refundId = refundId;
 		this.refundAmount = refundAmount;
 		this.refundResolvedDate = refundResolvedDate;
@@ -29,18 +29,13 @@ public class Managers {
 		this.refundDescription = refundDescription;
 	}
 	
-
+	public Reimbursement(String refundStatusId) {
+		this.refundStatusId = refundStatusId;
+	}
 	
-	public Managers(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
+	public Reimbursement() {
 	}
-
-	public Managers() {
-		
-	}
-
+	
 	public double getRefundAmount() {
 		return refundAmount;
 	}
@@ -103,19 +98,6 @@ public class Managers {
 
 	public void setRefundType(String refundType) {
 		this.refundType = refundType;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

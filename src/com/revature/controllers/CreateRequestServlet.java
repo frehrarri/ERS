@@ -1,7 +1,11 @@
 package com.revature.controllers;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
+
+
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,15 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.models.Employees;
-import com.revature.services.EmployeeServices;
+import com.revature.models.Reimbursement;
+import com.revature.services.ReimbursementService;
 
-public class GetEmployeeLoginPageServlet extends HttpServlet {
+public class CreateRequestServlet extends HttpServlet {
 
+	ReimbursementService rs = new ReimbursementService();
 	ObjectMapper om = new ObjectMapper();
-	EmployeeServices es = new EmployeeServices();
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+	
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		BufferedReader reader = req.getReader();
 		// A BufferedReader will read line by line the contents of the request body. we
 		// will use a StringBuilder to collect all the
@@ -36,12 +41,16 @@ public class GetEmployeeLoginPageServlet extends HttpServlet {
 
 		String body = new String(sb);
 
-		Employees user = om.readValue(body, Employees.class);
+		// Jackson reads the JSON from the body of the request and puts it in a Java
+		// object.
+		Reimbursement reimb = om.readValue(body, Reimbursement.class);
 
-		if (es.login(user)) {
-			resp.setStatus(200);
+		if (rs.addNewRequest(reimb)) {
+			resp.setStatus(201);
+			resp.getWriter().print("Your refund request has been created!");
 		} else {
-			resp.setStatus(403);
+			resp.setStatus(400);
 		}
 	}
 }
+
