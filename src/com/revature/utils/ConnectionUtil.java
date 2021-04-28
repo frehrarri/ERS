@@ -16,9 +16,9 @@ public class ConnectionUtil {
 		e.printStackTrace();
 	} 
 	
-	String url ="";
-	String user ="";
-	String pass ="";
+	String url ="jdbc:postgresql://localhost:5432/ers";
+	String user ="postgres";
+	String pass ="password";
 	
 	//creates our connection to our database
 	return DriverManager.getConnection(url, user, pass);

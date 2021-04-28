@@ -2,28 +2,36 @@ package com.revature.services;
 
 import java.util.List;
 
-import com.revature.models.Managers;
-import com.revature.repos.ManagerDAOsImpl;
 
-public class ManagerServices {
+import com.revature.models.Reimbursement;
+import com.revature.repos.ReimbursementDAOImpl;
+
+public class ReimbursementService {
 		
-		private static ManagerDAOsImpl mDao = new ManagerDAOsImpl();
+	Reimbursement req = new Reimbursement(0, 0, null, null, null, null, null, null, null);
+	
+		private static ReimbursementDAOImpl rDao = new ReimbursementDAOImpl();
+
+		public List<Reimbursement> getPendingRequests() {
+			return rDao.pendingRequests();
+		}
 		
-		public boolean login(Managers user) {
-			Managers userFromDB = mDao.getUserByUsername(user.getUsername());
-			if(userFromDB!=null && userFromDB.getPassword().equals(user.getPassword())) {
+		public List<Reimbursement> getCompletedRequests() {
+			return rDao.completedRequests();
+		}
+		
+		public String updateRequestStatusSvc(String refundStatusId) {
+			req.setRefundStatusId(refundStatusId);
+			return req.getRefundStatusId();
+		}
+		
+		public boolean addNewRequest(Reimbursement reimb) {
+			if(rDao.submitNewRequest(reimb)) {
 				return true;
 			}
 			return false;
 		}
 
-		public List<Managers> getPendingRequests() {
-			return mDao.pendingRequests();
-		}
-		
-		public List<Managers> getCompletedRequests() {
-			return mDao.completedRequests();
-		}
 		
 	}
 
