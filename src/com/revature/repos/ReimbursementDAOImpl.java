@@ -118,7 +118,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public void updateRequestStatus() {
+	public void updateRequestStatus(String refundStatusId) {
 		ReimbursementService rs = new ReimbursementService();
 		try (Connection conn = ConnectionUtil.getConnection()) {
 

@@ -8,6 +8,6 @@ public interface ReimbursementDAO {
 	
 	public List<Reimbursement> pendingRequests();
 	public List<Reimbursement> completedRequests();
-	public void updateRequestStatus();
+	public void updateRequestStatus(String refundStatusId);
 	public boolean submitNewRequest(Reimbursement reimb);
 }
