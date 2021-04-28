@@ -2,13 +2,12 @@ package com.revature.services;
 
 import java.util.List;
 
-
 import com.revature.models.Reimbursement;
 import com.revature.repos.ReimbursementDAOImpl;
 
 public class ReimbursementService {
 		
-	Reimbursement req = new Reimbursement(0, 0, null, null, null, null, null, null, null);
+	Reimbursement req = new Reimbursement();
 	
 		private static ReimbursementDAOImpl rDao = new ReimbursementDAOImpl();
 
