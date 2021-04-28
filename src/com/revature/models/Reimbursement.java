@@ -27,7 +27,13 @@ public class Reimbursement {
 		this.refundStatusId = refundStatusId;
 		this.refundType = refundType;
 		this.refundDescription = refundDescription;
-
+	}
+	
+	public Reimbursement(String refundStatusId) {
+		this.refundStatusId = refundStatusId;
+	}
+	
+	public Reimbursement() {
 	}
 	
 	public double getRefundAmount() {
