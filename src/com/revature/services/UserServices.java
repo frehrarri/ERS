@@ -7,12 +7,12 @@ public class UserServices {
 		
 		private static UsersDAOImpl uDao = new UsersDAOImpl();
 		
-		public boolean login(Users user) {
+		public Users login(Users user) {
 			Users userFromDB = uDao.getUserByUsername(user.getUsername());
 			if(userFromDB!=null && userFromDB.getPassword().equals(user.getPassword())) {
-				return true;
+				return userFromDB;
 			}
-			return false;
+			return null;
 		}
 	
 		

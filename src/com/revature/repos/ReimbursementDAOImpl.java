@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	public List<Reimbursement> pendingRequests() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement_status WHERE reimb_status = 'pending';";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1;";
 
 			// The statement object will run a query against the database with an open
 			// connection.
@@ -64,11 +65,16 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			// This will go through each result and get the info for the home, adding it to
 			// the list.
 			while (result.next()) {
-				Reimbursement req = new Reimbursement(result.getInt("reimb_id"), result.getDouble("reimb_amount"),
-						result.getDate("reimb_submitted"), result.getDate("reimb_resolved"),
-						result.getString("reimb_author"), result.getString("reimb_resolver"),
-						result.getString("reimb_status_id"), result.getString("reimb_type_id"),
-						result.getString("reimb_description"));
+				Reimbursement req = new Reimbursement(
+						result.getDouble("reimb_amount"),
+						result.getDate("reimb_submitted"), 
+						result.getDate("reimb_resolved"),
+						result.getString("reimb_description"),
+						result.getInt("reimb_author"), 
+						result.getInt("reimb_resolver"),
+						result.getInt("reimb_status_id"), 
+						result.getInt("reimb_type_id"),
+						result.getInt("reimb_id"));
 
 				list.add(req);
 			}
@@ -85,10 +91,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	public List<Reimbursement> completedRequests() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement_status WHERE reimb_status != 'pending';";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id != 1;";
 
 			// The statement object will run a query against the database with an open
-			// connection.
+			// connection.x
 			Statement statement = conn.createStatement();
 
 			List<Reimbursement> list = new ArrayList<>();
@@ -100,11 +106,16 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			// This will go through each result and get the info for the home, adding it to
 			// the list.
 			while (result.next()) {
-				Reimbursement req = new Reimbursement(result.getInt("reimb_id"), result.getDouble("reimb_amount"),
-						result.getDate("reimb_submitted"), result.getDate("reimb_resolved"),
-						result.getString("reimb_author"), result.getString("reimb_resolver"),
-						result.getString("reimb_status_id"), result.getString("reimb_type_id"),
-						result.getString("reimb_description"));
+				Reimbursement req = new Reimbursement(
+						result.getDouble("reimb_amount"),
+						result.getDate("reimb_submitted"), 
+						result.getDate("reimb_resolved"),
+						result.getString("reimb_description"),
+						result.getInt("reimb_author"), 
+						result.getInt("reimb_resolver"),
+						result.getInt("reimb_status_id"), 
+						result.getInt("reimb_type_id"),
+						result.getInt("reimb_id"));
 
 				list.add(req);
 			}
@@ -118,7 +129,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public void updateRequestStatus(String refundStatusId) {
+	public void updateRequestStatus(int refundStatusId) {
 		ReimbursementService rs = new ReimbursementService();
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
@@ -135,10 +146,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	@Override
 	public boolean submitNewRequest(Reimbursement reimb) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "BEGIN;" + "INSERT INTO ers_reimbursement_status (reimb_status)" + "VALUES(?);"
-					+ "INSERT INTO ers_reimbursement_type (reimb_type)" + "	VALUES (?);"
-					+ "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);" + "COMMIT;";
+			String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -147,10 +156,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			statement.setDate(++index, reimb.getRefundRequestedDate());
 			statement.setDate(++index, reimb.getRefundResolvedDate());
 			statement.setString(++index, reimb.getRefundDescription());
-			statement.setString(++index, reimb.getRefundAuthor());
-			statement.setString(++index, reimb.getRefundResolver());
-			statement.setString(++index, reimb.getRefundStatusId());
-			statement.setString(++index, reimb.getRefundType());
+			statement.setInt(++index, reimb.getRefundAuthor());
+			statement.setNull(++index, Types.INTEGER);
+			statement.setInt(++index, reimb.getRefundStatusId());
+			statement.setInt(++index, reimb.getRefundType());
 
 			statement.execute();
 			return true;

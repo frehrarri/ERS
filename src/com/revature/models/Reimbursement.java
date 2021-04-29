@@ -8,34 +8,60 @@ public class Reimbursement {
 	private Date refundRequestedDate;
 	private Date refundResolvedDate;
 	private String refundDescription;
-	private String refundAuthor;
-	private String refundResolver;
-	private String refundStatusId;
-	private String refundType;
+	private int refundAuthor;
+	private int refundResolver;
+	private int refundStatusId;
+	private int refundType;
 	private int refundId;
-
-	public Reimbursement(int refundId, double refundAmount, Date refundRequestedDate, Date refundResolvedDate,
-			String refundAuthor, String refundResolver, String refundStatusId, String refundType,
-			String refundDescription) {
-
-		this.refundId = refundId;
+	
+	public Reimbursement(double refundAmount, Date refundRequestedDate, Date refundResolvedDate,
+			String refundDescription, int refundAuthor, int refundResolver, int refundStatusId, int refundType,
+			int refundId) {
+		super();
 		this.refundAmount = refundAmount;
+		this.refundRequestedDate = refundRequestedDate;
 		this.refundResolvedDate = refundResolvedDate;
+		this.refundDescription = refundDescription;
 		this.refundAuthor = refundAuthor;
 		this.refundResolver = refundResolver;
-		this.refundRequestedDate = refundRequestedDate;
 		this.refundStatusId = refundStatusId;
 		this.refundType = refundType;
-		this.refundDescription = refundDescription;
+		this.refundId = refundId;
 	}
 	
-	public Reimbursement(String refundStatusId) {
+	
+
+	public Reimbursement(double refundAmount, Date refundRequestedDate, Date refundResolvedDate,
+			String refundDescription, int refundAuthor, int refundResolver, int refundStatusId, int refundType) {
+		super();
+		this.refundAmount = refundAmount;
+		this.refundRequestedDate = refundRequestedDate;
+		this.refundResolvedDate = refundResolvedDate;
+		this.refundDescription = refundDescription;
+		this.refundAuthor = refundAuthor;
+		this.refundResolver = refundResolver;
+		this.refundStatusId = refundStatusId;
+		this.refundType = refundType;
+	}
+
+
+
+	public Reimbursement(int refundStatusId) {
 		this.refundStatusId = refundStatusId;
 	}
 	
 	public Reimbursement() {
 	}
 	
+	
+	public int getRefundId() {
+		return refundId;
+	}
+
+	public void setRefundId(int refundId) {
+		this.refundId = refundId;
+	}
+
 	public double getRefundAmount() {
 		return refundAmount;
 	}
@@ -68,36 +94,38 @@ public class Reimbursement {
 		this.refundDescription = refundDescription;
 	}
 
-	public String getRefundAuthor() {
+	public int getRefundAuthor() {
 		return refundAuthor;
 	}
 
-	public void setRefundAuthor(String refundAuthor) {
+	public void setRefundAuthor(int refundAuthor) {
 		this.refundAuthor = refundAuthor;
 	}
 
-	public String getRefundResolver() {
+	public int getRefundResolver() {
 		return refundResolver;
 	}
 
-	public void setRefundResolver(String refundResolver) {
+	public void setRefundResolver(int refundResolver) {
 		this.refundResolver = refundResolver;
 	}
 
-	public String getRefundStatusId() {
+	public int getRefundStatusId() {
 		return refundStatusId;
 	}
 
-	public void setRefundStatusId(String refundStatusId) {
+	public void setRefundStatusId(int refundStatusId) {
 		this.refundStatusId = refundStatusId;
 	}
 
-	public String getRefundType() {
+	public int getRefundType() {
 		return refundType;
 	}
 
-	public void setRefundType(String refundType) {
+	public void setRefundType(int refundType) {
 		this.refundType = refundType;
 	}
+
+	
 
 }

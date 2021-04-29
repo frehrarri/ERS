@@ -6,7 +6,7 @@ public class Users {
 	
 	private String username;
 	private String password;
-	private String role;
+	private int role;
 
 	public Users(String username, String password) {
 		super();
@@ -34,5 +34,15 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+	
 
 }

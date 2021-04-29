@@ -16,7 +16,7 @@ public class UsersDAOImpl implements UsersDAO{
 	public Users getUserByUsername(String username) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
-			String sql = "SELECT * FROM users WHERE username = ?;";
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ?;";
 
 			// The prepared statement object will run a query against the database with an open
 			// connection. It will protect against SQL injection.
@@ -31,8 +31,9 @@ public class UsersDAOImpl implements UsersDAO{
 			// the list.
 			while (result.next()) {
 				Users user = new Users();
-				user.setUsername(result.getString("username"));
-				user.setPassword(result.getString("password"));
+				user.setUsername(result.getString("ers_username"));
+				user.setPassword(result.getString("ers_password"));
+				user.setRole(result.getInt("user_role_id"));
 				return user;
 			}
 

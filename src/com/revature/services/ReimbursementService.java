@@ -19,7 +19,7 @@ public class ReimbursementService {
 			return rDao.completedRequests();
 		}
 		
-		public String updateRequestStatusSvc(String refundStatusId) {
+		public int updateRequestStatusSvc(int refundStatusId) {
 			req.setRefundStatusId(refundStatusId);
 			return req.getRefundStatusId();
 		}
