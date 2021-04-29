@@ -37,9 +37,11 @@ public class LoginServlet extends HttpServlet {
 		String body = new String(sb);
 
 		Users user = om.readValue(body, Users.class);
-
-		if (us.login(user)) {
+		Users userCredentials = us.login(user);
+		if (userCredentials != null) {
 			resp.setStatus(200);
+			String json = om.writeValueAsString(userCredentials);
+			resp.getWriter().print(json);
 		} else {
 			resp.setStatus(403);
 		}
