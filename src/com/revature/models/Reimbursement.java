@@ -10,7 +10,7 @@ public class Reimbursement {
 	private String refundDescription;
 	private int refundAuthor;
 	private int refundResolver;
-	private int refundStatusId;
+	private static int refundStatusId;
 	private int refundType;
 	private int refundId;
 	
@@ -24,7 +24,7 @@ public class Reimbursement {
 		this.refundDescription = refundDescription;
 		this.refundAuthor = refundAuthor;
 		this.refundResolver = refundResolver;
-		this.refundStatusId = refundStatusId;
+		Reimbursement.refundStatusId = refundStatusId;
 		this.refundType = refundType;
 		this.refundId = refundId;
 	}
@@ -40,14 +40,14 @@ public class Reimbursement {
 		this.refundDescription = refundDescription;
 		this.refundAuthor = refundAuthor;
 		this.refundResolver = refundResolver;
-		this.refundStatusId = refundStatusId;
+		Reimbursement.refundStatusId = refundStatusId;
 		this.refundType = refundType;
 	}
 
 
 
 	public Reimbursement(int refundStatusId) {
-		this.refundStatusId = refundStatusId;
+		Reimbursement.refundStatusId = refundStatusId;
 	}
 	
 	public Reimbursement() {
@@ -110,12 +110,12 @@ public class Reimbursement {
 		this.refundResolver = refundResolver;
 	}
 
-	public int getRefundStatusId() {
+	public static int getRefundStatusId() {
 		return refundStatusId;
 	}
 
 	public void setRefundStatusId(int refundStatusId) {
-		this.refundStatusId = refundStatusId;
+		Reimbursement.refundStatusId = refundStatusId;
 	}
 
 	public int getRefundType() {

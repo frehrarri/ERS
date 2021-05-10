@@ -47,9 +47,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public List<Reimbursement> pendingRequests() {
+	public List<Reimbursement> allPendingRequests() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
+			//String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1 AND ers_user_role_id = 1;";
 			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1;";
 
 			// The statement object will run a query against the database with an open
@@ -88,10 +89,95 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public List<Reimbursement> completedRequests() {
+	public List<Reimbursement> usersPendingRequests() {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			//String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1 AND ers_user_role_id = 2;";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = 1;";
+			
+			// The statement object will run a query against the database with an open
+			// connection.
+			Statement statement = conn.createStatement();
+
+			List<Reimbursement> list = new ArrayList<>();
+
+			// The statement executes the query that we wrote and returns the response in a
+			// ResultSet object.
+			ResultSet result = statement.executeQuery(sql);
+
+			// This will go through each result and get the info for the home, adding it to
+			// the list.
+			while (result.next()) {
+				Reimbursement req = new Reimbursement(
+						result.getDouble("reimb_amount"),
+						result.getDate("reimb_submitted"), 
+						result.getDate("reimb_resolved"),
+						result.getString("reimb_description"),
+						result.getInt("reimb_author"), 
+						result.getInt("reimb_resolver"),
+						result.getInt("reimb_status_id"), 
+						result.getInt("reimb_type_id"),
+						result.getInt("reimb_id"));
+
+				list.add(req);
+			}
+
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Reimbursement> allCompletedRequests() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
 			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id != 1;";
+			//String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id != 1 AND ers_user_role_id = 1;";
+
+			// The statement object will run a query against the database with an open
+			// connection.x
+			Statement statement = conn.createStatement();
+
+			List<Reimbursement> list = new ArrayList<>();
+
+			// The statement executes the query that we wrote and returns the response in a
+			// ResultSet object.
+			ResultSet result = statement.executeQuery(sql);
+
+			// This will go through each result and get the info for the home, adding it to
+			// the list.
+			while (result.next()) {
+				Reimbursement req = new Reimbursement(
+						result.getDouble("reimb_amount"),
+						result.getDate("reimb_submitted"), 
+						result.getDate("reimb_resolved"),
+						result.getString("reimb_description"),
+						result.getInt("reimb_author"), 
+						result.getInt("reimb_resolver"),
+						result.getInt("reimb_status_id"), 
+						result.getInt("reimb_type_id"),
+						result.getInt("reimb_id"));
+
+				list.add(req);
+			}
+
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Reimbursement> userCompletedRequests() {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id != 1;";
+			//String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id != 1 AND ers_user_role_id = 2;";
 
 			// The statement object will run a query against the database with an open
 			// connection.x
@@ -134,7 +220,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
 			String sql = "UPDATE ers_reimbursement SET reimbursement_status = "
-					+ rs.updateRequestStatusSvc(refundStatusId) + " WHERE reimbursement_status  = 'pending';";
+					+ rs.updateRequestStatusSvc(refundStatusId) + " WHERE reimb_status_id  = 1;";
 			Statement statement = conn.createStatement();
 			statement.execute(sql);
 

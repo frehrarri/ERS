@@ -29,7 +29,7 @@ public class CORSFilter implements Filter {
 	        
 	        res.setHeader("Access-Control-Allow-Origin", "null"); // Allow all origins
 	        
-	        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+	        res.setHeader("Access-Control-Allow-Methods", "GET, PATCH, POST, PUT, DELETE, OPTIONS, HEAD");
 	        // Allow specific HTTP Verbs
 	        
 	        res.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type,"

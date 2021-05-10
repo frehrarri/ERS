@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERS-Reimbursement Request</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+        #pretty>th {
+            color: rebeccapurple;
+        }
+    </style>
+</head>
+
+<body class="container-fluid bg-dark text-white">
+    <br>
+    <label id="Welcome_lb" class="control-label col-sm-10"
+        style="color:orange;text-align:left;font-size:larger;font-weight: bold;"></label>
+    <a style="float: right"
+        href="file:///Z:/Users/mitch/eclipse-workspace/Eclipse/ERS/project-2-we-re-not-objects/Frontend/login.html">EXIT</a>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="reimb_amount_lb" class="control-label col-sm-6">Reimbursement Amount: </label>
+            <div class="col-sm-2">
+                <input class="form-control" type="number" value="" id="reimb_amount">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description_lb" class="control-label col-sm-6">Description of Reimbursement: </label>
+            <div class="col-sm-6">
+                <textarea class="form-control" id="description" rows="4"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="reimb_type_id_lb" class="control-label col-sm-6">Reimbursement Type: </label>
+            <div class="col-sm-4">
+                <select class="form-control" id="reimb_type_id_txt">
+                    <option>Lodging</option>
+                    <option>Travel</option>
+                    <option>Food</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+
+        <label id="receipt_lb" class="col-6 col-form-label">Receipt: </label>
+        <div class="col-6">
+            <input type="file" class="form-control-file" id="receipt" aria-describedby="fileHelp">
+        </div>
+        <br>
+
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+
+        </div>
+        <br>
+        <div class="row" id="table-row">
+            <table class="table-dark table-striped table-hover table-bordered col-10 col-form-label" id="reimb_table">
+                <thead class="thead-light"
+                    style="padding: 5px;border: 1px solid black;background-color:white;color:black;text-align:center;font-size:medium;font-weight: bold;">
+                    <div class="col-sm-1"></div>
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Date submitted</th>
+                        <th>Status</th>
+                        <th>Resolver</th>
+                        <th>Date resolved</th>
+                        <th>Author's username</th>
+                    </tr>
+                </thead>
+                <tbody style="padding: 5px;border: 1px solid black;text-align:center;font-size:medium;" id="reimb_body">
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+
+
+    </form>
+    <script src="ReimbursementApp.js"></script>
+</body>
+
+</html>
